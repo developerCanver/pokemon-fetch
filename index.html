@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<style>
+    img {
+        display: block;
+        margin: auto;
+        width: 70px;
+    }
+
+    .caja {
+        padding: 20px;
+        margin: 10px;
+        background: #bdf0fa;    width: 100px;
+    }
+
+    .texto {
+        color: #0c92ac;
+        font-weight: bold;
+        padding: 15px;
+        border: 2px solid #abecf9;
+        border-radius: 6px;
+    }
+</style>
+
+<body onload="reaload()">
+    <form id="frmEnviar">
+        <ul>
+            <li>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre">
+            </li>
+            <li>
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad">
+            </li>
+            <li>
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje"></textarea>
+            </li>
+            <li>
+                <button type="submit" id="botonEnviar">Envía el mensaje</button>
+            </li>
+        </ul>
+    </form>
+
+    <p id="msj"></p>
+
+    <form id="frmBuscar">
+        <h3>Buscar</h3>
+        <ul>
+            <li>
+                <label for="nombre">ID:</label>
+                <input type="text" id="busID">
+            </li>
+            <li>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="busNombre">
+            </li>
+
+            <li>
+                <button type="submit" id="botonEnviar">Envía el mensaje</button>
+            </li>
+        </ul>
+    </form>
+
+
+    <div id="seccion_pokemon" class="seccion_pokemon">
+     
+
+
+    </div>
+    <div id="demo" >
+     
+
+
+    </div>
+
+    <!-- <div class="caja" >
+        <img src="https://pokeres.bastionbot.org/images/pokemon/1.png" width="50px" alt="">
+        <p class="texto">Tu caja de color azul y cantos redondeados</p>
+    </div> -->
+
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>
