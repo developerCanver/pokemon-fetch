@@ -1,15 +1,18 @@
 reaload = () => {
 
-    
+
+
+
     var busID = document.getElementById("busID")
     var formBus = document.getElementById("frmBuscar")
 
     var frmCantidad = document.getElementById("frmCantidad")
     var busCan = document.getElementById("busCan")
+    const boton = document.querySelector("#miBoton");
+    // Agregar listener
+ 
 
     formBus.onsubmit = (e) => {
-        // alt + 96  ``
-
         e.preventDefault();
 
         buscarID = busID.value;
@@ -22,6 +25,10 @@ reaload = () => {
         buscarCan = busCan.value;
         cantidadPokemon(buscarCan);
     }
+
+    boton.addEventListener("click", function(evento){
+        cantidadPokemon(20)
+    });
 
     fetchKantoPokemon = (buscarID) => {
             //consultar por id o nombre
@@ -57,43 +64,50 @@ reaload = () => {
         .then(response => response.json())
         .then(function (dataPokemon) {  
             console.log(dataPokemon)          
-            atributosPokemon(dataPokemon)
+            imagePokemon(dataPokemon)
         })
 
     }
-    imagePokemon = (pokeID) => {
+    imagePokemon = (allpokemon) => {
 //console.log(pokeID)
+
         let seccionPokemon = document.getElementById("seccion_pokemon")
+        let id = document.createElement('h6')
         let pokeImage = document.createElement('img')
-        pokeImage.srcset =  `https://pokeres.bastionbot.org/images/pokemon/${pokeID}.png`
+        let nombre = document.createElement('p')
+        let listaul = document.createElement('ul')
+        let experiencia = document.createElement('h5')
+        let altura = document.createElement('h5')
+      
+        id.classList.add('h6');
+        nombre.classList.add('texto');
+        experiencia.classList.add('h6');
+        altura.classList.add('h6');
+ 
+        id.textContent = 'ID: '+ allpokemon.id;
+        experiencia.textContent= 'Experiencia: ' + allpokemon.base_experience;
+        altura.textContent= 'Altura: ' + allpokemon.height;
+
+        nombre.textContent = allpokemon.name;
+        pokeImage.srcset = allpokemon.sprites.front_default;
         pokeImage.style.width = "100px";
+        
 
-       
+   
+        //   allpokemon.abilities.forEach(function (pokemon) {
+ 
+        //      var linew= document.createElement("li"); 
+        //      linew.classList.add('li');   
+        //      var contenido = document.createTextNode(pokemon.ability.name);
+        //      listaul.appendChild(linew);
+        //      linew.appendChild(contenido);
+          
+              seccionPokemon.append(id,pokeImage,experiencia,altura,nombre)
+        //  })
 
-        seccionPokemon.append(pokeImage)
-        seccionPokemon.style.background = "red"
+      
+   
     }
-
-    // imagePokemon = (pokeID, buscarID) => {
-    //    // console.log(pokeID);
-    //     let seccionPokemon = document.getElementById("seccion_pokemon")
-    //     let seccionNombre = document.getElementById("nombre")
-    //     let pokeImage = document.createElement('img')
-       
-    //     let pokNombre = "";
-
-
-    //     pokeImage.srcset = `https://pokeres.bastionbot.org/images/pokemon/${buscarID}.png`
-    //     pokeImage.style.width = "100px";
-    //     pokNombre = pokeID.name;
-    //     //console.log(pokNombre)
-
-    //     //console.log(`https://pokeres.bastionbot.org/images/pokemon/${pokeID}.png`)
-    //     //seccionNombre.append(pokNombre);
-    //     document.getElementById("demo").innerHTML = '<div class="caja" ><img src="'+ pokeImage.srcset +'" width="50px" alt=""> <p class="texto">'+pokNombre+'</p></div>';
-     
-    // }
-
     
     atributosPokemon = (allpokemon, buscarID) => {
     
@@ -123,12 +137,9 @@ reaload = () => {
                    
         })
 
-
-        // document.getElementById("demo").innerHTML = '<div class="caja" ><img src="" width="50px" alt=""> <p class="texto">'+allpokemon.name+'</p></div>';
-     
-
      }
 
 
-
+    
+     
 }

@@ -18,7 +18,7 @@
     .caja {
         padding: 20px;
         margin: 10px;
-        background: #bdf0fa;
+       
         width: 150px;
     }
 
@@ -29,18 +29,27 @@
         border: 2px solid #abecf9;
         border-radius: 6px;
         text-align: center;
-    } .h6 {
+    }
+
+    .h6 {
         color: #263d5a;
-  
+        text-align: center;
         padding: 0;
-      margin: 0;
+        margin: 0;
+    }
+
+    .li {
+        text-align: center;
+    }
+
+    .contenido {
+        margin: auto;
+        display: table;
+        padding: 15px;
     }
 </style>
 
 <body onload="reaload()">
-
-
-
     <form id="frmBuscar">
         <h3>Buscar</h3>
         <ul>
@@ -48,14 +57,12 @@
                 <label for="nombre">ID / Nombre:</label>
                 <input type="text" id="busID" value="2">
             </li>
-          
-
             <li>
                 <button type="submit" id="botonEnviar">Buscar</button>
             </li>
         </ul>
     </form>
-    <form id="frmCantidad">     
+    <form id="frmCantidad">
         <ul>
             <br>
             <li>
@@ -66,20 +73,19 @@
                 <button type="submit" id="botonEnviar">Cantidad</button>
             </li>
             <hr>
-            <li>
-                <label for="nombre">ListarPokemon:</label>
-               
-                <button type="submit" onclick="listar()">Listar</button>
-            </li>
+
         </ul>
     </form>
-
-
-    <div id="seccion_pokemon" class="seccion_pokemon">
-
-
-
+    <div class="contenido">
+        <label for="nombre">ListarPokemon:</label>
+        <button id="miBoton">Haz click sobre mí :)</button>
     </div>
+
+    
+    <div id="seccion_pokemon" class="seccion_pokemon" class="caja">
+
+   </div>
+ 
 
 
     <div class="caja" id="lista-pokemon">
