@@ -1,35 +1,11 @@
 reaload = () => {
 
-    var btnEnviar = document.getElementById("botonEnviar");
-    var form = document.getElementById("frmEnviar")
-
-    var inpNombre = document.getElementById("nombre")
-    var inpEdad = document.getElementById("edad")
-    var inpMensaje = document.getElementById("mensaje")
+    
     var busID = document.getElementById("busID")
-
-    var pMsj = document.getElementById("msj")
-
-
-    // btnEnviar.addEventListener("click", ()=> {
-    //     console.log("hola mundo")
-    // })
-    console.log(busID.value);
-
-    form.onsubmit = (e) => {
-        // alt + 96  ``
-
-        e.preventDefault();
-
-        let cadenaMsj = `La persona con el nombre ${inpNombre.value} y edad ${inpEdad.value} envia el mensaje "${inpMensaje.value}"`
-
-        console.log(cadenaMsj)
-        //console.log(form.nombre.value)
-        pMsj.innerHTML = cadenaMsj
-    }
-
     var formBus = document.getElementById("frmBuscar")
-    var busID = document.getElementById("busID")
+
+    var frmCantidad = document.getElementById("frmCantidad")
+    var busCan = document.getElementById("busCan")
 
     formBus.onsubmit = (e) => {
         // alt + 96  ``
@@ -37,78 +13,122 @@ reaload = () => {
         e.preventDefault();
 
         buscarID = busID.value;
-        //console.log(buscarID)
-        //console.log(form.nombre.value)
-        //fetchKantoPokemon(dataPokemon)
-
-    
 
         fetchKantoPokemon(buscarID);
+    }  
+    frmCantidad.onsubmit = (e) => {
+        e.preventDefault();
+
+        buscarCan = busCan.value;
+        cantidadPokemon(buscarCan);
     }
 
     fetchKantoPokemon = (buscarID) => {
-        if (buscarID == null) {
-            fetch(`https://pokeapi.co/api/v2/berry/${buscarID}`)
+            //consultar por id o nombre
+            fetch(`https://pokeapi.co/api/v2/pokemon/${buscarID}`)
             .then(response => response.json())
             .then(function (allpokemon) {
-                allpokemon.results.forEach(function (pokemon) {
-                    getPokemonData(pokemon);
-                    // console.log(pokemon);          
-                })
-            })
-        } else {
-            fetch(`https://pokeapi.co/api/v2/berry/${buscarID}`)
-            .then(response => response.json())
-            .then(function (allpokemon) {
-                console.log(allpokemon);
+                //console.log(allpokemon);
                 if(!Array.allpokemon) {
                     console.log("no es array")
-                    getPokemonData(pokemon , buscarID);
-                    
+                    atributosPokemon(allpokemon , buscarID)
                 }
-
-             
-                
-                     //console.log(buscarID);          
              
             })
 
         }
-        //console.log(this->busID)
-      
+    
+    cantidadPokemon = (buscarCan) => {
+        //consultar por id o nombre
+        fetch(`https://pokeapi.co/api/v2/pokemon?limit=${buscarCan}`)
+        .then(response => response.json())
+        .then(function (allpokemon) {
+            allpokemon.results.forEach(function (pokemon) {   
+                getPokemonData(pokemon);                
+            })
+        })
+
     }
 
-    //fetchKantoPokemon();
 
-    getPokemonData = (pokemon, buscarID) => {
+    getPokemonData = (pokemon) => {
 
         fetch(pokemon.url)
-            .then(response => response.json())
-            .then(function (dataPokemon) {
-                //console.log(dataPokemon);           
-                imagePokemon(dataPokemon, buscarID)
-            })
+        .then(response => response.json())
+        .then(function (dataPokemon) {  
+            console.log(dataPokemon)          
+            atributosPokemon(dataPokemon)
+        })
 
     }
-
-    imagePokemon = (pokeID, buscarID) => {
-        console.log(pokeID);
+    imagePokemon = (pokeID) => {
+//console.log(pokeID)
         let seccionPokemon = document.getElementById("seccion_pokemon")
-        let seccionNombre = document.getElementById("nombre")
         let pokeImage = document.createElement('img')
-        let seccionnombre = document.createElement('h4')
-        let pokNombre = "";
-
-
-        pokeImage.srcset = `https://pokeres.bastionbot.org/images/pokemon/${buscarID}.png`
+        pokeImage.srcset =  `https://pokeres.bastionbot.org/images/pokemon/${pokeID}.png`
         pokeImage.style.width = "100px";
-        pokNombre = pokeID.name;
-        //console.log(pokNombre)
 
-        //console.log(`https://pokeres.bastionbot.org/images/pokemon/${pokeID}.png`)
-        //seccionNombre.append(pokNombre);
-        document.getElementById("demo").innerHTML = '<div class="caja" ><img src="'+ pokeImage.srcset +'" width="50px" alt=""> <p class="texto">'+pokNombre+'</p></div>';
-     
+       
+
+        seccionPokemon.append(pokeImage)
+        seccionPokemon.style.background = "red"
     }
+
+    // imagePokemon = (pokeID, buscarID) => {
+    //    // console.log(pokeID);
+    //     let seccionPokemon = document.getElementById("seccion_pokemon")
+    //     let seccionNombre = document.getElementById("nombre")
+    //     let pokeImage = document.createElement('img')
+       
+    //     let pokNombre = "";
+
+
+    //     pokeImage.srcset = `https://pokeres.bastionbot.org/images/pokemon/${buscarID}.png`
+    //     pokeImage.style.width = "100px";
+    //     pokNombre = pokeID.name;
+    //     //console.log(pokNombre)
+
+    //     //console.log(`https://pokeres.bastionbot.org/images/pokemon/${pokeID}.png`)
+    //     //seccionNombre.append(pokNombre);
+    //     document.getElementById("demo").innerHTML = '<div class="caja" ><img src="'+ pokeImage.srcset +'" width="50px" alt=""> <p class="texto">'+pokNombre+'</p></div>';
+     
+    // }
+
+    
+    atributosPokemon = (allpokemon, buscarID) => {
+    
+        let lista = document.getElementById("lista-pokemon")
+        let imagen =lista.getElementsByTagName("img")[0]
+        let nombre =lista.getElementsByTagName("p")[0]
+        let experiencia =lista.getElementsByTagName("h5")[0]
+        let id =lista.getElementsByTagName("h6")[0]
+       imagen.setAttribute("src", allpokemon.sprites.front_default)
+       nombre.textContent = allpokemon.name;
+       id.textContent = 'ID: '+ allpokemon.id;
+       //experiencia.textContent = 'Altura: '+ allpokemon.base_experience;
+
+       //document.getElementById("imges").src =allpokemon.sprites.front_default;
+       // console.log(allpokemon.sprites.front_default)
+
+
+       var listaul=document.getElementById("ulListado"); 
+       document.getElementById("habilidades").innerHTML = 'Habilidades';
+         allpokemon.abilities.forEach(function (pokemon) {
+             console.log(pokemon.ability.name)
+
+            var linew= document.createElement("li");    
+            var contenido = document.createTextNode(pokemon.ability.name);
+            listaul.appendChild(linew);
+            linew.appendChild(contenido); 
+                   
+        })
+
+
+        // document.getElementById("demo").innerHTML = '<div class="caja" ><img src="" width="50px" alt=""> <p class="texto">'+allpokemon.name+'</p></div>';
+     
+
+     }
+
+
 
 }
